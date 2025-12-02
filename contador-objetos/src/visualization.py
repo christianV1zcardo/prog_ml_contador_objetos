@@ -1,4 +1,4 @@
-"""Visualization helpers for drawing and saving contour results."""
+"""Funciones de visualización para dibujar y guardar resultados."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -9,9 +9,9 @@ import numpy as np
 
 
 def draw_contours(image: np.ndarray, contours: Sequence[np.ndarray], annotate: bool = True) -> np.ndarray:
-    """Return a copy of the image with contours and optional annotations."""
+    """Devuelve una copia de la imagen con contornos y anotaciones opcionales."""
     if image is None:
-        raise ValueError("Input image is None.")
+        raise ValueError("La imagen de entrada está vacía.")
     output = image.copy()
     cv2.drawContours(output, contours, -1, (0, 255, 0), 2)
 
@@ -39,9 +39,9 @@ def draw_contours(image: np.ndarray, contours: Sequence[np.ndarray], annotate: b
 
 
 def save_image(path: Path | str, image: np.ndarray) -> None:
-    """Persist an image to disk, raising if the write fails."""
+    """Guarda una imagen en disco y avisa si ocurre un error."""
     if image is None:
-        raise ValueError("Image is None.")
+        raise ValueError("La imagen está vacía.")
 
     final_path = Path(path)
     final_path.parent.mkdir(parents=True, exist_ok=True)

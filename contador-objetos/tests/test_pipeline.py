@@ -48,8 +48,8 @@ def test_segmentation_manual_threshold_override() -> None:
 
 def test_detection_filters_by_area() -> None:
     binary = np.zeros((120, 160), dtype=np.uint8)
-    cv2.rectangle(binary, (10, 10), (60, 80), 255, -1)  # area > 300
-    cv2.rectangle(binary, (90, 20), (105, 35), 255, -1)  # area < 300
+    cv2.rectangle(binary, (10, 10), (60, 80), 255, -1)  # área > 300
+    cv2.rectangle(binary, (90, 20), (105, 35), 255, -1)  # área < 300
 
     contours, count = find_objects(binary, min_area=300, max_area=0)
     assert count == 1
@@ -72,7 +72,7 @@ def test_detection_filters_by_shape_metrics() -> None:
 
 def test_detection_auto_max_area_filters_large_regions() -> None:
     binary = np.zeros((200, 200), dtype=np.uint8)
-    cv2.rectangle(binary, (0, 0), (199, 199), 255, -1)  # llena casi todo el frame
+    cv2.rectangle(binary, (0, 0), (199, 199), 255, -1)  # llena casi todo el fotograma
 
     contours, count = find_objects(binary, min_area=300)
     assert count == 0

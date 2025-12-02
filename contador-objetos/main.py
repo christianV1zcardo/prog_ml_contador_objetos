@@ -21,6 +21,7 @@ SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tif", ".tiff"}
 
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    """Construye el parser de argumentos para la aplicación CLI."""
     parser = argparse.ArgumentParser(description="Contador de objetos por contornos")
     parser.add_argument(
         "--image",
@@ -65,7 +66,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def load_image(path: Path) -> np.ndarray:
-    """Load an image from disk, raising an explicit error when missing."""
+    """Carga una imagen desde disco y avisa si no existe."""
     image = cv2.imread(str(path))
     if image is None:
         raise FileNotFoundError(f"No se encontró la imagen requerida en: {path}")
@@ -73,11 +74,12 @@ def load_image(path: Path) -> np.ndarray:
 
 
 def _is_pattern(path: Path) -> bool:
+    """Indica si la ruta contiene comodines tipo glob."""
     return any(char in str(path) for char in "*?[]")
 
 
 def collect_input_paths(target: Path) -> List[Path]:
-    """Return a sorted list of image paths based on a file, directory or patrón."""
+    """Obtiene una lista ordenada de imágenes a partir de archivo, carpeta o patrón."""
     if _is_pattern(target):
         matches = sorted(Path(p) for p in Path().glob(str(target)))
         valid = [p for p in matches if p.is_file()]
@@ -101,7 +103,7 @@ def collect_input_paths(target: Path) -> List[Path]:
 
 
 def build_output_path(source: Path, output_arg: Path, multi: bool) -> Path:
-    """Determine dónde guardar el resultado asociado a una imagen."""
+    """Determina dónde guardar el resultado asociado a una imagen."""
     if not multi:
         if output_arg.is_dir() or output_arg.suffix == "":
             output_arg.mkdir(parents=True, exist_ok=True)
@@ -127,7 +129,7 @@ def run_pipeline(
     max_area: float | None,
     annotate: bool,
 ) -> int:
-    """Execute the detection pipeline and return the contour count."""
+    """Ejecuta el pipeline de detección y devuelve la cantidad de contornos."""
     image = load_image(input_path)
     gray = to_gray(image)
     blurred = apply_blur(gray)

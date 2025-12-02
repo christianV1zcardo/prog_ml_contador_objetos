@@ -1,4 +1,4 @@
-"""Object detection utilities based on contour analysis."""
+"""Utilidades de detección basadas en el análisis de contornos."""
 from __future__ import annotations
 
 import math
@@ -31,9 +31,9 @@ def find_objects(
     min_extent: float = 0.4,
     max_area: float | None = None,
 ) -> Tuple[List[np.ndarray], int]:
-    """Find contours in a binary image and filter them by area and shape metrics."""
+    """Encuentra contornos en una imagen binaria y los filtra por área y forma."""
     if binary_image is None:
-        raise ValueError("Binary image is None.")
+        raise ValueError("La imagen binaria está vacía.")
 
     if max_area is None:
         height, width = binary_image.shape[:2]

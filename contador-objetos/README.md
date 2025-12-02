@@ -54,7 +54,7 @@ Las pruebas unitarias validan cada etapa (preprocesamiento, segmentación, detec
 ```text
 contador-objetos/
 ├── images/
-│   └── input.jpg
+│   └── (coloca aquí tus imágenes .jpg/.png/etc.)
 ├── main.py
 ├── output/
 ├── README.md

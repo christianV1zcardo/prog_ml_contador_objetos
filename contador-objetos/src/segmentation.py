@@ -1,4 +1,4 @@
-"""Image segmentation helpers."""
+"""Funciones de segmentación de imágenes."""
 from __future__ import annotations
 
 import cv2
@@ -10,9 +10,9 @@ def apply_threshold(
     thresh_value: int | None = None,
     invert: bool | None = None,
 ) -> np.ndarray:
-    """Apply binary thresholding, usando Otsu por defecto para mayor robustez."""
+    """Aplica umbralización binaria, usando Otsu por defecto para mayor robustez."""
     if gray_image is None:
-        raise ValueError("Gray image is None.")
+        raise ValueError("La imagen en escala de grises está vacía.")
 
     if invert is None:
         # Objetos oscuros en fondo claro => invertir; caso contrario, modo normal.
